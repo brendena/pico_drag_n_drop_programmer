@@ -12,7 +12,7 @@ This example is trying to mimic the way that the raspberry pi pico bootloader co
 * cmake .. -DPICO_COPY_TO_RAM=1
 
 ## Command to flash pico
-* openocd -f interface/picoprobe.cfg -f target/rp2040.cfg -c "program PICO_MSC.elf verify reset exit
+* openocd -f interface/picoprobe.cfg -f target/rp2040.cfg -c "program PICO_MSC.elf verify reset exit"
 
 # Things inside this repo
 

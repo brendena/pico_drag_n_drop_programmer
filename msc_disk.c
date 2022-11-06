@@ -57,7 +57,7 @@ uint8_t DISK_reservedSection[DISK_BLOCK_SIZE] =
     0xEB, 0x3C, 0x90, 
     0x4D, 0x53, 0x57, 0x49, 0x4E, 0x34, 0x2E, 0x31, //MSWIN4.1
     0x00, 0x02,  //sector 512
-    0x08,        //cluster size 8
+    0x08,        //cluster size 8 sectors -unit for file sizes
     0x01, 0x00,  //BPB_RsvdSecCnt
     0x02,        //Number of fat tables
     0x00, 0x02,  //BPB_RootEntCnt  
@@ -272,7 +272,7 @@ bool tud_msc_is_writable_cb (uint8_t lun)
 int32_t tud_msc_write10_cb(uint8_t lun, uint32_t lba, uint32_t offset, uint8_t* buffer, uint32_t bufsize)
 {
   (void) lun;
-  //printf("write - lba 0x%x, offset %d, bufsize%d\n", lba,offset,bufsize);
+  printf("write - lba 0x%x, bufsize%d\n", lba,bufsize);
   
   // out of ramdisk
   if ( lba >= DISK_BLOCK_NUM ) return -1;
@@ -290,7 +290,6 @@ int32_t tud_msc_write10_cb(uint8_t lun, uint32_t lba, uint32_t offset, uint8_t* 
     if(addressUF2 != 0)
     {
       printf("UF2 FILE %d!!!\n",flashingLocation.pageCountFlash );
-      printf("returnSize 0x%x\n", *returnSize);
       flash_range_program(flashingLocation.pageCountFlash * FLASH_PAGE_SIZE,
                           &buffer[32], 
                           256);
@@ -306,7 +305,7 @@ int32_t tud_msc_write10_cb(uint8_t lun, uint32_t lba, uint32_t offset, uint8_t* 
 
   if(lba == INDEX_ROOT_DIRECTORY)
   {
-    printf("\n\n\nStarting the raspberry pi pico!!!! \n\n\n");
+    printf("\n\n\nRestarting the raspberry pi pico!!!! \n\n\n");
     sleep_ms(100);//just to make sure all uart get out
 
     software_reset();
