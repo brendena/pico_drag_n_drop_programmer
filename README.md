@@ -1,6 +1,8 @@
 # Example unoptimized Drag n' Drop Programmer
 This example is trying to mimic the way that the raspberry pi pico bootloader copies a UF2 file into the flash.  The actuall bootloader can be found [here](https://github.com/raspberrypi/pico-bootrom), but it's highly optimized "by design", so i made this to explore how it worked at a less optimized way.  Starting point for this was the [tinyUSB CDC_MSC example](https://github.com/hathach/tinyusb/tree/master/examples/device/cdc_msc)
 
+## [Video describing project](https://www.youtube.com/watch?v=tmmHijhct_k)
+
 ## Things inside this demo are
 * USB MSC - "USB storage"
 * FAT16 file system
